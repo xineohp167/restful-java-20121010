@@ -48,6 +48,7 @@ public class UsersResource {
 	public Response getUsers(@Context Request request) {
 		Collection<User> users = userRepository.getUsers();
 
+		// Cache version using hashcode
 		EntityTag eTag = new EntityTag(String.valueOf(users.hashCode()));
 		ResponseBuilder response = request.evaluatePreconditions(eTag);
 		if (response != null) {
